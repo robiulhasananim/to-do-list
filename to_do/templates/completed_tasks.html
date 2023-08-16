@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="width:50%; margin: auto; text-align: center;">
+  <h1 style="text-align: center; background-color: rgb(30, 107, 26);" class="text-white mx-5 my-3 rounded-3 py-1" > Completed Tasks </h1>
+  <table class="table table-bordered border-dark">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Status</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    {% for item in data %}
+      {% if item.is_completed %}
+      <tr>
+        <td>{{item.taskTitle}}</td>
+        <td>{{item.taskDescription}}</td>
+        <td>{% if item.is_completed %}
+            <small class="text-success fw-bold">Complete</small>
+        {% endif %}</td>
+        <td> 
+          <a href="{% url 'delete_tasks' pk=item.id%}" class="btn btn-danger  fw-bold">Delete</a> 
+        </td>
+      </tr> 
+      {%else%}
+      {% endif %}
+      {% endfor %}
+  </table>
+</div>
+{% endblock  %}
